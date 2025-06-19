@@ -7,7 +7,10 @@ const taskSchema = new mongoose.Schema({
         trim: true,
         maxlength: [20, `name can't be more than 20 characters!`]
     },
-
+    completed: {
+        type: Boolean,
+        default: false
+    }
 });
 
 export default mongoose.model('tasks', taskSchema);
