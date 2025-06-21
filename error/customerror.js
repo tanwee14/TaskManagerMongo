@@ -5,3 +5,6 @@ export class custom_error extends Error {
     }
 };
 
+export const createCustomError = (message, statusCode) => {
+    return new custom_error(message, statusCode);
+}
