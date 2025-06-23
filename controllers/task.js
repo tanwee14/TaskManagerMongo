@@ -52,7 +52,13 @@ export const addTask = asyncWrapper(
         const { name } = req.body;
         const foundTask = await task.findOne({ name });
 
+        // check if this task is already existed
+        if (foundTask) {
 
+            const error = createCustomError(`this task name already existed!`, 409);
+            next(error);
+
+        }
 
         const newTask = await task.create(req.body);
 
