@@ -45,3 +45,21 @@ export const editTask = asyncWrapper(
         return res.status(200).json({ message: `task updated successfully!`, updatedTask });
     }
 );
+
+export const addTask = asyncWrapper(
+    async (req, res, next) => {
+
+        const { name } = req.body;
+        const foundTask = await task.findOne({ name });
+
+
+
+        const newTask = await task.create(req.body);
+
+        return res.status(201).json({
+            message: 'added new task successfully!',
+            newTask
+        });
+
+    }
+);
