@@ -68,4 +68,27 @@ export const addTask = asyncWrapper(
         });
 
     }
+
+    export const editTask = asyncWrapper(
+    async (req, res, next) => {
+
+        // get the task to be updated
+        const { id } = req.params;
+        const targetTask = await task.findById(id);
+
+        // check if the task not found
+        if (!targetTask) {
+            const error = createCustomError('Task Not Found', 404);
+            next(error);
+        }
+
+        // update the chosen one
+        const updatedTask = await task.findByIdAndUpdate(id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        return res.status(200).json({ message: `task updated successfully!`, updatedTask });
+    }
+);
 );
