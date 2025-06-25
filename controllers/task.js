@@ -69,26 +69,21 @@ export const addTask = asyncWrapper(
 
     }
 
-    export const editTask = asyncWrapper(
+export const deleteTask = asyncWrapper(
     async (req, res, next) => {
-
-        // get the task to be updated
         const { id } = req.params;
-        const targetTask = await task.findById(id);
+        const singleTask = await task.findById(id);
 
-        // check if the task not found
-        if (!targetTask) {
-            const error = createCustomError('Task Not Found', 404);
-            next(error);
-        }
+        // check if the task found to delete
+        // if (!singleTask) {
+        //     const error = createCustomError('Task Not Found to delete!', 404);
+        //     next(error);
+        // }
 
-        // update the chosen one
-        const updatedTask = await task.findByIdAndUpdate(id, req.body, {
-            new: true,
-            runValidators: true
-        });
+        // delete the chosen one
+        const deletedTask = await task.findByIdAndDelete(id);
 
-        return res.status(200).json({ message: `task updated successfully!`, updatedTask });
+        return res.status(200).json({ message: 'Task Deleted Successfully!' });
     }
 );
 );
