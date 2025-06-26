@@ -74,11 +74,11 @@ export const deleteTask = asyncWrapper(
         const { id } = req.params;
         const singleTask = await task.findById(id);
 
-        // check if the task found to delete
-        // if (!singleTask) {
-        //     const error = createCustomError('Task Not Found to delete!', 404);
-        //     next(error);
-        // }
+        check if the task found to delete
+        if (!singleTask) {
+            const error = createCustomError('Task Not Found to delete!', 404);
+            next(error);
+        }
 
         // delete the chosen one
         const deletedTask = await task.findByIdAndDelete(id);
