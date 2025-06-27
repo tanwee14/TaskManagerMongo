@@ -68,13 +68,14 @@ export const addTask = asyncWrapper(
         });
 
     }
+);
 
 export const deleteTask = asyncWrapper(
     async (req, res, next) => {
         const { id } = req.params;
         const singleTask = await task.findById(id);
 
-        check if the task found to delete
+        // check if the task found to delete
         if (!singleTask) {
             const error = createCustomError('Task Not Found to delete!', 404);
             next(error);
@@ -85,5 +86,4 @@ export const deleteTask = asyncWrapper(
 
         return res.status(200).json({ message: 'Task Deleted Successfully!' });
     }
-);
 );
